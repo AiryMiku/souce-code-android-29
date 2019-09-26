@@ -50,6 +50,7 @@ import java.util.Set;
  * explicit call to set the capacity should turn off this aggressive shrinking behavior.</p>
  */
 public final class ArrayMap<K, V> implements Map<K, V> {
+    //节省内存的map
     private static final boolean DEBUG = false;
     private static final String TAG = "ArrayMap";
 
@@ -69,13 +70,13 @@ public final class ArrayMap<K, V> implements Map<K, V> {
      * The minimum amount by which the capacity of a ArrayMap will increase.
      * This is tuned to be relatively space-efficient.
      */
-    private static final int BASE_SIZE = 4;
+    private static final int BASE_SIZE = 4; //保守的增长
 
     /**
      * Maximum number of entries to have in array caches.
      */
     @UnsupportedAppUsage(maxTargetSdk = 28) // Allocations are an implementation detail.
-    private static final int CACHE_SIZE = 10;
+    private static final int CACHE_SIZE = 10;   //提供缓存
 
     /**
      * Special hash array value that indicates the container is immutable.
@@ -213,9 +214,9 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                 if (mTwiceBaseCache != null) {
                     final Object[] array = mTwiceBaseCache;
                     mArray = array;
-                    mTwiceBaseCache = (Object[])array[0];
-                    mHashes = (int[])array[1];
-                    array[0] = array[1] = null;
+                    mTwiceBaseCache = (Object[])array[0];   // 缓存指向数据第0个
+                    mHashes = (int[])array[1];  // 哈希数也指向第一个key的hash
+                    array[0] = array[1] = null; // 置空
                     mTwiceBaseCacheSize--;
                     if (DEBUG) Log.d(TAG, "Retrieving 2x cache " + mHashes
                             + " now have " + mTwiceBaseCacheSize + " entries");
@@ -227,7 +228,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                 if (mBaseCache != null) {
                     final Object[] array = mBaseCache;
                     mArray = array;
-                    mBaseCache = (Object[])array[0];
+                    mBaseCache = (Object[])array[0];    // 同上
                     mHashes = (int[])array[1];
                     array[0] = array[1] = null;
                     mBaseCacheSize--;
@@ -237,7 +238,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                 }
             }
         }
-
+        // 最佳size 4 and 8
         mHashes = new int[size];
         mArray = new Object[size<<1];
     }

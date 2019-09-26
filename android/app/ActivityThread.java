@@ -7307,6 +7307,7 @@ public final class ActivityThread extends ClientTransactionHandler {
         }
     }
 
+    // 一个App的起点
     public static void main(String[] args) {
         Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "ActivityThreadMain");
 
@@ -7326,6 +7327,7 @@ public final class ActivityThread extends ClientTransactionHandler {
 
         Process.setArgV0("<pre-initialized>");
 
+        // 准备Looper
         Looper.prepareMainLooper();
 
         // Find the value for {@link #PROC_START_SEQ_IDENT} if provided on the command line.
@@ -7346,6 +7348,7 @@ public final class ActivityThread extends ClientTransactionHandler {
             sMainThreadHandler = thread.getHandler();
         }
 
+        // 意义不明，暂未找到解释
         if (false) {
             Looper.myLooper().setMessageLogging(new
                     LogPrinter(Log.DEBUG, "ActivityThread"));
@@ -7353,6 +7356,7 @@ public final class ActivityThread extends ClientTransactionHandler {
 
         // End of event ActivityThreadMain.
         Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+        // 开始loop的循环，死循环，但不会卡死，looper利用了Linux的pipe/epoll机制，当有消息发生时，唤起线程，不用则会进入休眠状态
         Looper.loop();
 
         throw new RuntimeException("Main thread loop unexpectedly exited");

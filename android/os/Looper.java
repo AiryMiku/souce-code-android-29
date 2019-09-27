@@ -76,7 +76,7 @@ public final class Looper {
 
     @UnsupportedAppUsage
     final MessageQueue mQueue;
-    final Thread mThread;
+    final Thread mThread;       // 自己是拥有线程的，不会卡死
 
     @UnsupportedAppUsage
     private Printer mLogging;
@@ -170,8 +170,8 @@ public final class Looper {
 
         boolean slowDeliveryDetected = false;
 
-        for (;;) {
-            Message msg = queue.next(); // might block
+        for (;;) {  // 循环
+            Message msg = queue.next(); // might block 再此阻塞
             if (msg == null) {
                 // No message indicates that the message queue is quitting.
                 return;
@@ -282,7 +282,7 @@ public final class Looper {
      * null if the calling thread is not associated with a Looper.
      */
     public static @Nullable Looper myLooper() {
-        return sThreadLocal.get();
+        return sThreadLocal.get();      // 说白了，就是从现在的线程取得的looper，threadlocal就是这样起作用的
     }
 
     /**

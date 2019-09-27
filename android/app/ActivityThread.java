@@ -7348,7 +7348,7 @@ public final class ActivityThread extends ClientTransactionHandler {
             sMainThreadHandler = thread.getHandler();
         }
 
-        // 意义不明，暂未找到解释
+        // 感觉只是为了方便测试，maybe有工具自动替换代码
         if (false) {
             Looper.myLooper().setMessageLogging(new
                     LogPrinter(Log.DEBUG, "ActivityThread"));

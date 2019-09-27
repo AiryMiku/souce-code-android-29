@@ -409,7 +409,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         final int N = mSize*2;
         final Object[] array = mArray;
         if (value == null) {
-            for (int i=1; i<N; i+=2) {
+            for (int i=1; i<N; i+=2) {      // 简单的循环遍历
                 if (array[i] == null) {
                     return i>>1;
                 }
@@ -444,7 +444,7 @@ public final class ArrayMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(Object key) {
-        final int index = indexOfKey(key);
+        final int index = indexOfKey(key);      // 也是先index再直接取出
         return index >= 0 ? (V)mArray[(index<<1)+1] : null;
     }
 

@@ -54,7 +54,7 @@ import libcore.util.EmptyArray;
  * values corresponding to the keys are returned in ascending order.
  */
 public class SparseArray<E> implements Cloneable {
-    private static final Object DELETED = new Object();
+    private static final Object DELETED = new Object();     // 使用一个object对象来标记删除
     private boolean mGarbage = false;
 
     @UnsupportedAppUsage(maxTargetSdk = 28) // Use keyAt(int)
@@ -212,7 +212,7 @@ public class SparseArray<E> implements Cloneable {
         for (int i = 0; i < n; i++) {
             Object val = values[i];
 
-            if (val != DELETED) {
+            if (val != DELETED) {       // 原有数据直接覆盖掉删除标记的位置
                 if (i != o) {
                     keys[o] = keys[i];
                     values[o] = val;
@@ -240,7 +240,7 @@ public class SparseArray<E> implements Cloneable {
         if (i >= 0) {
             mValues[i] = value;
         } else {
-            i = ~i;
+            i = ~i;     // 二分找到的接近的中间点，就是插入可能保证是有序的地方
 
             if (i < mSize && mValues[i] == DELETED) {
                 mKeys[i] = key;
@@ -255,7 +255,7 @@ public class SparseArray<E> implements Cloneable {
                 i = ~ContainerHelpers.binarySearch(mKeys, mSize, key);
             }
 
-            mKeys = GrowingArrayUtils.insert(mKeys, mSize, i, key);
+            mKeys = GrowingArrayUtils.insert(mKeys, mSize, i, key);     // dynamic increase capacity
             mValues = GrowingArrayUtils.insert(mValues, mSize, i, value);
             mSize++;
         }
@@ -265,7 +265,7 @@ public class SparseArray<E> implements Cloneable {
      * Returns the number of key-value mappings that this SparseArray
      * currently stores.
      */
-    public int size() {
+    public int size() {     // 获取size也会进行gc
         if (mGarbage) {
             gc();
         }

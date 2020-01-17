@@ -674,7 +674,7 @@ public final class Choreographer {
             if (jitterNanos >= mFrameIntervalNanos) {
                 final long skippedFrames = jitterNanos / mFrameIntervalNanos;
                 if (skippedFrames >= SKIPPED_FRAME_WARNING_LIMIT) {
-                    Log.i(TAG, "Skipped " + skippedFrames + " frames!  "
+                    Log.i(TAG, "Skipped " + skippedFrames + " frames!  "    // 当app没有做好优化白屏时间过长，这里就会报debug log
                             + "The application may be doing too much work on its main thread.");
                 }
                 final long lastFrameOffset = jitterNanos % mFrameIntervalNanos;

@@ -824,7 +824,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
         mTaskChangeNotificationController =
                 new TaskChangeNotificationController(mGlobalLock, mStackSupervisor, mH);
         mLockTaskController = new LockTaskController(mContext, mStackSupervisor, mH);
-        mActivityStartController = new ActivityStartController(this);
+        mActivityStartController = new ActivityStartController(this);   // stack superivsor inside
         mRecentTasks = createRecentTasks();
         mStackSupervisor.setRecentTasks(mRecentTasks);
         mVrController = new VrController(mGlobalLock);
@@ -1055,7 +1055,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
                 .setProfilerInfo(profilerInfo)
                 .setActivityOptions(bOptions)
                 .setMayWait(userId)
-                .execute();
+                .execute(); // attention the excute is in the starter
 
     }
 

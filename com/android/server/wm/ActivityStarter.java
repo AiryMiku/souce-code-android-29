@@ -506,11 +506,13 @@ class ActivityStarter {
      * Starts an activity based on the request parameters provided earlier.
      * @return The starter result.
      */
+    // that the excute
     int execute() {
         try {
             // TODO(b/64750076): Look into passing request directly to these methods to allow
             // for transactional diffs and preprocessing.
             if (mRequest.mayWait) {
+                // invoke here
                 return startActivityMayWait(mRequest.caller, mRequest.callingUid,
                         mRequest.callingPackage, mRequest.realCallingPid, mRequest.realCallingUid,
                         mRequest.intent, mRequest.resolvedType,
@@ -1131,6 +1133,7 @@ class ActivityStarter {
         }
     }
 
+    // put may wait in activitystarter
     private int startActivityMayWait(IApplicationThread caller, int callingUid,
             String callingPackage, int requestRealCallingPid, int requestRealCallingUid,
             Intent intent, String resolvedType, IVoiceInteractionSession voiceSession,

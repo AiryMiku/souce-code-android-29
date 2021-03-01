@@ -78,6 +78,7 @@ public class ActivityStartController {
     private ActivityRecord mLastHomeActivityStartRecord;
 
     /** Temporary array to capture start activity results */
+    // record init
     private ActivityRecord[] tmpOutRecord = new ActivityRecord[1];
 
     /** The result of the last home activity we attempted to start. */
@@ -425,7 +426,7 @@ public class ActivityStartController {
                         .setOriginatingPendingIntent(originatingPendingIntent)
                         .setAllowBackgroundActivityStart(allowBackgroundActivityStart);
             }
-
+            // init a activity record
             final ActivityRecord[] outActivity = new ActivityRecord[1];
             // Lock the loop to ensure the activities launched in a sequence.
             synchronized (mService.mGlobalLock) {

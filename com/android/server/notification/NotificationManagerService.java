@@ -701,6 +701,7 @@ public class NotificationManagerService extends SystemService {
         out.endDocument();
     }
 
+    // To manger toast
     private static final class ToastRecord
     {
         final int pid;
@@ -6040,6 +6041,7 @@ public class NotificationManagerService extends SystemService {
         mWindowManagerInternal.removeWindowToken(t, true /* removeWindows */, displayId);
     }
 
+    // (name changed) by using this func to control toast disappear, a little change from android 5.0
     @GuardedBy("mToastQueue")
     private void scheduleDurationReachedLocked(ToastRecord r)
     {

@@ -702,6 +702,7 @@ public class ActivityStackSupervisor implements RecentTasks.Callbacks {
         return resolveActivity(intent, rInfo, startFlags, profilerInfo);
     }
 
+    // huge diffrent from api 21
     boolean realStartActivityLocked(ActivityRecord r, WindowProcessController proc,
             boolean andResume, boolean checkConfig) throws RemoteException {
 

@@ -6879,7 +6879,7 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
             if (childDimension >= 0) {
                 // Child wants a specific size... so be it
                 resultSize = childDimension;
-                resultMode = MeasureSpec.EXACTLY;
+                resultMode = MeasureSpec.EXACTLY;   // identify mode as exactly
             } else if (childDimension == LayoutParams.MATCH_PARENT) {
                 // Child wants to be our size, but our size is not fixed.
                 // Constrain child to not be bigger than us.

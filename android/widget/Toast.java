@@ -51,7 +51,7 @@ import java.lang.annotation.RetentionPolicy;
  * {@more}
  *
  * <p>
- * When the view is shown to the user, appears as a floating view over the
+ * When the view is shownscheduleTime to the user, appears as a floating view over the
  * application.  It will never receive focus.  The user will probably be in the
  * middle of typing something else.  The idea is to be as unobtrusive as
  * possible, while still showing the user the information you want them to see.
@@ -408,6 +408,7 @@ public class Toast {
                             "Can't toast on a thread that has not called Looper.prepare()");
                 }
             }
+            // use handle to swap thread
             mHandler = new Handler(looper, null) {
                 @Override
                 public void handleMessage(Message msg) {

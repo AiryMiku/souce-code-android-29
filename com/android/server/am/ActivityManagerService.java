@@ -3492,6 +3492,7 @@ public class ActivityManagerService extends IActivityManager.Stub
     public int startActivity(IApplicationThread caller, String callingPackage,
             Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode,
             int startFlags, ProfilerInfo profilerInfo, Bundle bOptions) {
+        // all start activity delgate by activity task manager service
         return mActivityTaskManager.startActivity(caller, callingPackage, intent, resolvedType,
                 resultTo, resultWho, requestCode, startFlags, profilerInfo, bOptions);
     }
